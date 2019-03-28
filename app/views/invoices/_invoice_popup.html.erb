@@ -21,6 +21,7 @@
                 <button id="enterPayment" class="btn btn-default truncate" onclick="$('.invoice_payment_link').click();"><%= t('views.invoices.enter_payment_on_invoice') %></button>
             <% end %>
             <span><%= @client.organization_name %></span>
+
           </h5>
         </div>
         <div class="info-section clearfix">
@@ -93,6 +94,18 @@
                 <span><strong><%= number_to_currency(invoice.invoice_total - Payment.invoice_paid_amount(invoice.id), unit: invoice.currency.present? ? invoice.currency.unit : '$') %></strong></span>
               </div>
             </div>
+
+            <!-- Field of amount received -->
+            
+            <div class="table-row">
+                <span class="text-blue" style="font-size:13px"><strong><%= t('views.invoices.amount_received') %></strong>
+                </span>
+                <span class="text-blue" style="float:right; font-size: 13px">
+                  <strong><%= Currency.find(invoice.curry_type).unit %> <%= invoice.received%></strong>
+                </span>
+            </div>
+  
+            <!-- End of field -->
           </div>
           <div class="left-section left notes-section clearfix">
             <strong><%= t('views.common.notes') %>: </strong> <%= @invoice.notes %>
